@@ -11,5 +11,7 @@ namespace Domains.Entities
         public string Label { get; set; }
 
         public ICollection<Button> Buttons { get; set; }
+
+        public ICollection<Tag> Tags { get; set; }
     }
 }
