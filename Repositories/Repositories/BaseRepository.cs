@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Repositories
+namespace Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity, new()
     {
