@@ -12,9 +12,9 @@ namespace Services.Services
 {
     public class ButtonsService : IButtonsService
     {
-        private readonly IBaseRepository<Button> m_buttonRepo;
+        private readonly IButtonsRepository m_buttonRepo;
 
-        public ButtonsService(IBaseRepository<Button> buttonRepo)
+        public ButtonsService(IButtonsRepository buttonRepo)
         {
             m_buttonRepo = buttonRepo;
         }

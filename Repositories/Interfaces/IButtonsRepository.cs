@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace Repositories.Interfaces
 {
-    public interface IBaseRepository<T> where T : BaseEntity
+    public interface IButtonsRepository : IBaseRepository<Button>
     {
-        
+        Task<IEnumerable<Button>> SelectAllAsync();
+
+        IEnumerable<Button> FindMatching(Expression<Func<Button, bool>> predicate);
     }
 }

@@ -3,26 +3,21 @@ using Repositories;
 using Services;
 
 var builder = WebApplication.CreateBuilder(args);
+//dotnet ef database update --project C:\Users\guilh\Dev\botoes-memes-api\Repositories  --startup-project C:\Users\guilh\Dev\botoes-memes-api\WebAPI
+RepositoriesInjector.AddRepositories(builder.Services);
+ServicesInjector.AddServices(builder.Services);
 
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]));
-
-// Add services to the container.
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlite(builder.Configuration["ConnectionStrings:DefaultConnection"]));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-RepositoriesInjector.AddRepositories(builder.Services);
-ServicesInjector.AddServices(builder.Services);
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

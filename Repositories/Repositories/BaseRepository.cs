@@ -22,19 +22,5 @@ namespace Repositories
             _db = context;
             _dbSet = _db.Set<T>();
         }
-
-        public virtual async Task<IEnumerable<T>> SelectAllAsync()
-        {
-            return await _dbSet
-                .AsNoTracking()
-                .ToArrayAsync();
-        }
-
-        public virtual IEnumerable<T> FindMatching(Expression<Func<T, bool>> predicate)
-        {
-            var rval =_dbSet.Where(predicate);
-
-            return rval.ToList();
-        }
     }
 }

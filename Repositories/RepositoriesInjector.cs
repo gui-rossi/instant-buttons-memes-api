@@ -13,6 +13,7 @@ namespace Repositories
         public static void AddRepositories(IServiceCollection services)
         {
             services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddTransient<IButtonsRepository, ButtonsRepository>();
         }
     }
 }
