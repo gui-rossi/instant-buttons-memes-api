@@ -13,17 +13,39 @@ namespace Services.Services
     public class ButtonsService : IButtonsService
     {
         private readonly IButtonsRepository m_buttonRepo;
+        
+        private readonly IBlobStorageService m_blobRepo;
 
-        public ButtonsService(IButtonsRepository buttonRepo)
+
+        public ButtonsService(IButtonsRepository buttonRepo, IBlobStorageService blobRepo)
         {
             m_buttonRepo = buttonRepo;
+            m_blobRepo = blobRepo;
         }
 
-        public async Task<IEnumerable<Button>> GetButtonsAsync()
+        public async Task<ButtonVM> GetButtonsAsync()
         {
-            var entities = await m_buttonRepo.SelectAllAsync();
+            var entity = (await m_buttonRepo.SelectAllAsync()).FirstOrDefault();
 
-            return entities;
+            var blob = (await m_blobRepo.GetBlobStreamsAsync()).FirstOrDefault()!;
+
+            using (var mem = new MemoryStream())
+            {
+                blob.Position = 0;
+
+                blob.CopyTo(mem);
+
+                var bytes = mem.ToArray();
+
+                var button = new ButtonVM()
+                {
+                    Name = entity.Name,
+                    Category = entity.Category,
+                    File = Convert.ToBase64String(bytes)
+                };
+
+                return button;
+            };
         }
     }
 }
