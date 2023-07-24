@@ -40,7 +40,6 @@ namespace Services.Services
                 var button = new ButtonVM()
                 {
                     Name = entity.Name,
-                    Category = entity.Category,
                     File = Convert.ToBase64String(bytes)
                 };
 

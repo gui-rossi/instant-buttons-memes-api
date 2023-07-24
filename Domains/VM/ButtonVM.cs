@@ -12,7 +12,5 @@ namespace Domains.VM
         public string Name { get; set; }
 
         public string File { get; set; }
-
-        public Category Category { get; set; }
     }
 }
