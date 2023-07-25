@@ -14,6 +14,7 @@ namespace Repositories
         {
             services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IButtonsRepository, ButtonsRepository>();
+            services.AddTransient<ICategoriesRepository, CategoriesRepository>();
         }
     }
 }

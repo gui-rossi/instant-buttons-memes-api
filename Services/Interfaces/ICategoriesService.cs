@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Services.Interfaces
 {
-    public interface IButtonsService
+    public interface ICategoriesService
     {
-        Task<List<ButtonVM>> GetButtonsAsync();
+        Task<dynamic> GetCategoriesAsync();
     }
 }

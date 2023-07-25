@@ -11,6 +11,7 @@ namespace Services
         {
             services.AddTransient(typeof(IButtonsService), typeof(ButtonsService));
             services.AddTransient<IBlobStorageService, BlobStorageService>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
         }
     }
 }

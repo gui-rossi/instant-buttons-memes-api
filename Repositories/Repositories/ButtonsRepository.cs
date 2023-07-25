@@ -14,10 +14,16 @@ namespace Repositories
     {
         public ButtonsRepository(DatabaseContext context) : base(context) { }
 
-        public async Task<IEnumerable<Button>> SelectAllAsync()
+        public async Task<List<Button>> SelectAllAsync(bool includeCategory = false)
         {
+            if (includeCategory)
+            {
+                return await _dbSet
+                    .Include(x => includeCategory)
+                    .ToListAsync();
+            }
+
             return await _dbSet
-                .Include(x => x.Category)
                 .ToListAsync();
         }
 
@@ -26,6 +32,11 @@ namespace Repositories
             var rval = _dbSet.Where(predicate);
 
             return rval.ToList();
+        }
+
+        public async Task<Button> FindByIdAsync(int buttonId)
+        {
+            return await _dbSet.FindAsync(buttonId);
         }
     }
 }

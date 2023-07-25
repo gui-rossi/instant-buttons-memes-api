@@ -6,7 +6,7 @@ using Services.Interfaces;
 namespace WebAPI.Controllers
 {
     [Controller]
-    [Route("api/Buttons/")]
+    [Route("api/Button/")]
     public class ButtonsController : Controller
     {
         private readonly IButtonsService m_buttonService;
@@ -17,9 +17,17 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("FetchButtons")]
-        public async Task<ButtonVM> GetButtons()
+        public async Task<List<ButtonVM>> GetButtons()
         {
             var rval = await m_buttonService.GetButtonsAsync();
+
+            return rval;
+        }
+
+        [HttpGet("FetchButtonFile/{int:buttonId}")]
+        public async Task<List<ButtonVM>> GetButtonFile(int buttonId)
+        {
+            var rval = await m_buttonService.GetButtonsAsync(buttonId);
 
             return rval;
         }

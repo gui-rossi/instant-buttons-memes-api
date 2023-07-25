@@ -10,8 +10,10 @@ namespace Repositories.Interfaces
 {
     public interface IButtonsRepository : IBaseRepository<Button>
     {
-        Task<IEnumerable<Button>> SelectAllAsync();
+        Task<List<Button>> SelectAllAsync(bool includeCategory = false);
 
         IEnumerable<Button> FindMatching(Expression<Func<Button, bool>> predicate);
+
+        Task<Button> FindByIdAsync(int buttonId);
     }
 }
