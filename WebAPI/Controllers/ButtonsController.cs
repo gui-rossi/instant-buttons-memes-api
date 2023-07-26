@@ -24,10 +24,10 @@ namespace WebAPI.Controllers
             return rval;
         }
 
-        [HttpGet("FetchButtonFile/{int:buttonId}")]
-        public async Task<List<ButtonVM>> GetButtonFile(int buttonId)
+        [HttpGet("FetchButtonFile/{buttonId:int}")]
+        public async Task<ButtonVM> GetButtonFile(int buttonId)
         {
-            var rval = await m_buttonService.GetButtonsAsync(buttonId);
+            var rval = await m_buttonService.GetButtonFileAsync(buttonId);
 
             return rval;
         }

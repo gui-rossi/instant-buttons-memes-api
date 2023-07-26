@@ -11,5 +11,7 @@ namespace Services.Interfaces
     public interface IButtonsService
     {
         Task<List<ButtonVM>> GetButtonsAsync();
+
+        Task<ButtonVM> GetButtonFileAsync(int buttonId);
     }
 }

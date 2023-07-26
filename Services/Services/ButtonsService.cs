@@ -33,27 +33,6 @@ namespace Services.Services
             var buttons = m_mapper.Map<List<ButtonVM>>(entities);
 
             return buttons;
-
-            //var entity = (await m_buttonRepo.SelectAllAsync()).FirstOrDefault();
-
-            //var blob = (await m_blobRepo.GetBlobStreamsAsync()).FirstOrDefault()!;
-
-            //using (var mem = new MemoryStream())
-            //{
-            //    blob.Position = 0;
-
-            //    blob.CopyTo(mem);
-
-            //    var bytes = mem.ToArray();
-
-            //    var button = new ButtonVM()
-            //    {
-            //        Name = entity.Name,
-            //        File = Convert.ToBase64String(bytes)
-            //    };
-
-            //    return button;
-            //};
         }
 
         public async Task<ButtonVM> GetButtonFileAsync(int buttonId)
@@ -62,11 +41,24 @@ namespace Services.Services
 
             if (entity == null)
             {
-                throw new Exception($"File {buttonId} does not exist.");
+                throw new Exception($"Entity {buttonId} does not exist in the database.");
             }
 
+            var file = await m_blobRepo.GetBlobStreamAsync(entity.Name);
 
+            if (file == null)
+            {
+                throw new Exception($"File {entity.Name} does not exist in the container.");
+            }
 
+            var button = new ButtonVM()
+            {
+                Id = buttonId,
+                Name = entity.Name,
+                File = Convert.ToBase64String(file.ToArray()),
+            };
+
+            return button;
         }
     }
 }

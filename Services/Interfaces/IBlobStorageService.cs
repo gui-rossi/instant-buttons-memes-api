@@ -9,5 +9,7 @@ namespace Services.Interfaces
     public interface IBlobStorageService
     {
         Task<List<Stream>> GetBlobStreamsAsync();
+
+        Task<MemoryStream> GetBlobStreamAsync(string fileName);
     }
 }
