@@ -15,5 +15,7 @@ namespace Repositories.Interfaces
         IEnumerable<Button> FindMatching(Expression<Func<Button, bool>> predicate);
 
         Task<Button> FindByIdAsync(int buttonId);
+
+        void UpdateButtonAsync(Button button);
     }
 }

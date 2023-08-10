@@ -44,6 +44,11 @@ namespace Services.Services
                 throw new Exception($"Entity {buttonId} does not exist in the database.");
             }
 
+            #if !DEBUG
+                entity.TimesClicked++;
+                m_buttonRepo.UpdateButtonAsync(entity);
+            #endif
+
             var file = await m_blobRepo.GetBlobStreamAsync(entity.Name);
 
             if (file == null)

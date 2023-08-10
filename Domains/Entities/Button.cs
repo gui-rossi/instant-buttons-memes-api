@@ -10,6 +10,8 @@ namespace Domains.Entities
 
         public int CategoryId { get; set; }
 
+        public int TimesClicked { get; set; }
+
         public virtual Category Category { get; set; }
     }
 }

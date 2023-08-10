@@ -38,5 +38,16 @@ namespace Repositories
         {
             return await _dbSet.FindAsync(buttonId);
         }
+
+        public void UpdateButtonAsync(Button button)
+        {
+            _dbSet.Update(button);
+            ApplyChanges();
+        }
+
+        public void ApplyChanges()
+        {
+            _db.SaveChanges();
+        }
     }
 }
